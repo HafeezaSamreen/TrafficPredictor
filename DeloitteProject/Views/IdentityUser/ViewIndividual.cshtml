@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "ViewIndividual";
+}
+
+<br />
+
+
+<div class="col-md-8">
+    <div class="card mb-3 small">
+        <div class="card-body">
+
+            @foreach (var record in ViewData["entries"] as IList<UserUpload>)
+            {
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Uploaded by:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @record.Name
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Created on:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @record.CreatedDate.ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">File Info</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        @record.fileName
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+    <h4>Results:</h4>
+    <p>@ViewData["Results"]</p>
+
+    @if (ViewData["Predictions"]!=null)
+    {
+
+            int idx = 1;
+        
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 mt-5">
+                    <table class="table table-striped small">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Temperature</th>
+                                <th scope="col">Rain</th>
+                                <th scope="col">Snow</th>
+                                <th scope="col">Clouds All</th>
+                                <th scope="col">Predictions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var record in ViewData["Predictions"] as IList<OutputClass>)
+                            {
+                                <tr>
+                                    <th scope="row">@idx</th>
+                                    <td>@record.temp</td>
+                                    <td>@record.rain_1h</td>
+                                    <td>@record.snow_1h</td>
+                                    <td>@record.clouds_all</td>
+                                    <td>@record.Prediction</td>
+                                </tr>
+                                idx = idx + 1;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-3 mt-5">
+
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+</div>
